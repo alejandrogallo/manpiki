@@ -1,0 +1,82 @@
+#! /usr/bin/env python
+
+import os
+import sys
+import json
+import argparse
+
+parser = argparse.ArgumentParser(description="Manpiki command line interface")
+
+parser.add_argument("-v", "--verbose", help="Make the output verbose", action="store_true")
+parser.add_argument("-f", "--file", help="Input file with the text to be processed.", action="store")
+parser.add_argument("-c", "--command", help="Command to be performed on every word.", action="store")
+
+def createDictWord(word, qtrans, text):
+    """TODO: Docstring for createJsonWord.
+
+    :word: Original word to be translated
+    :qtrans: Quick translation, one word
+    :text: Longer texts of the data retrieval
+    :returns: json Formated word to be appended to a file
+
+    """
+    jsonWord = {
+            'word': word,
+            'qtrans': qtrans,
+            'text': text
+             }
+    return jsonWord
+def printv(arg1):
+    """
+    Verbose print
+    """
+    if VERBOSE:
+        print(arg1)
+
+if __name__=="__main__" :
+    # Parse arguments
+    args = parser.parse_args()
+
+    if args.verbose:
+        print("Making the command verbose...")
+        VERBOSE=True
+    else:
+        VERBOSE=False
+
+    if args.command:
+        run_command = lambda word: os.popen("%s %s"%(args.command, word)).read()
+    else:
+        print("You did not provide a command, no translation can therefore be retrieved.")
+        sys.exit(1)
+
+
+    words_file = open(args.file, "r")
+
+    WORDS = []
+    for line in words_file:
+        for word in line.split(" "):
+            if len(word) == 0:
+                continue
+            if word == "\n":
+                word = "newline"
+                qtrans = ""
+                text = ""
+            else:
+                text=run_command(word)
+                if not text:
+                    qtrans = ""
+                    text = "Not found..."
+                else:
+                    qtrans = "Quick.."
+            WORDS.append(createDictWord(word,qtrans,text))
+
+    print(json.dumps(WORDS))
+
+
+
+
+
+
+
+# vim:ft=python fdm=marker :
+
