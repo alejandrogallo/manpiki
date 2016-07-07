@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>MANPIKI</title>
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css" media="screen" title="no title" charset="utf-8">
+  </head>
+  <body ng-app="manpiki" ng-controller="ViewerController">
+
+
+    <div class="container">
+      <h1 class="page-header">
+        <span class="glyphicon glyphicon-tower" aria-hidden="true"></span>
+        Welcome to Manpiki
+        <span class="glyphicon glyphicon-tower" aria-hidden="true"></span>
+      </h1>
+
+      <div class="container">
+        <span ng-repeat="word in words" uib-tooltip="{{word.qtrans}}" tooltip-placement="top">
+          <span uib-popover-template="'word.html'" popover-placement="bottom">
+            {{word.word}}
+          </span>
+        </span>
+
+        <script type="text/ng-template" id="word.html" charset="utf-8">
+          <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
+          <span>
+            {{word.word}} <br>
+            {{word.text}}
+          </span>
+        </script>
+
+
+
+      </div>
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+<script src="bower_components/angular/angular.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js" type="text/javascript" charset="utf-8"></script>
+
+
+
+
+<script src="js/manpiki.js" type="text/javascript" charset="utf-8"></script>
+
+
+
+</body>
+</html>
