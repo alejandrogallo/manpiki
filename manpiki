@@ -58,7 +58,7 @@ if __name__=="__main__" :
             if len(word) == 0:
                 continue
             if word == "\n":
-                word = "newline"
+                word = "\n"
                 qtrans = ""
                 text = ""
             else:

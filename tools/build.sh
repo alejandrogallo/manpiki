@@ -40,8 +40,6 @@ a </style>
 d
 }" ${BUILD_VIEWER}
 
-  #r${SRC_DIR}/${fileName} " ${BUILD_VIEWER}
-
 done
 
 header "JS files"
